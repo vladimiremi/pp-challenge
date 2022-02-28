@@ -56,6 +56,8 @@ export function AccordionList() {
                 opacity={agent.status === "inactive" ? "0.5" : "1"}
                 key={agent.agent_id}
                 mb="2"
+                p="1"
+                isFocusable={false}
                 borderRadius="0.5rem"
                 border={`2px solid ${
                   borderGreen === index ? "#B5F1DD" : "#EAEFED"

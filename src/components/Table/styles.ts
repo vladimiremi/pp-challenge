@@ -4,13 +4,19 @@ export const Container = styled.div`
   table {
     width: 100%;
     border-spacing: 0 0.3rem;
+    border-collapse: separate;
     border-collapse: collapse;
-
     thead {
-      border: 1px solid #cad6d1;
+      tr {
+        border: 1px solid #cad6d1;
+        overflow: hidden;
+
+        border-radius: 2px;
+      }
     }
 
     th {
+      border-radius: 3px;
       color: var(--text-body);
       background: var(--shape);
       font-weight: 600;
@@ -24,6 +30,7 @@ export const Container = styled.div`
       border: 0;
       background: var(--shape);
       color: var(--text-body);
+      border-bottom: 2px solid #eaefed;
       /* border-radius: 0.25rem; */
       div {
         display: flex;
@@ -43,22 +50,22 @@ export const Container = styled.div`
 
       &.active {
         div {
-          width: 80%;
+          width: 100%;
           justify-content: center;
           background-color: var(--green);
-          border-radius: 10px;
-          padding: 0.2rem 0;
+          border-radius: 1rem;
+          padding: 0.2rem 0.7rem;
           color: #34423d;
         }
       }
 
       &.inactive {
         div {
-          width: 80%;
+          width: 100%;
           justify-content: center;
           background-color: #eaefed;
-          border-radius: 10px;
-          padding: 0.2rem 0;
+          border-radius: 1rem;
+          padding: 0.2rem 0.7rem;
           color: #34423d;
         }
       }

@@ -62,7 +62,14 @@ export function Table() {
         </thead>
         <tbody>
           {agents.map((agent) => (
-            <tr key={agent.agent_id}>
+            <tr
+              style={
+                agent.status === "inactive"
+                  ? { opacity: "0.5" }
+                  : { opacity: "1" }
+              }
+              key={agent.agent_id}
+            >
               <td>
                 <div>
                   <img alt={agent.name} src={agent.image}></img>{" "}

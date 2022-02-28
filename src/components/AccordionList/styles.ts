@@ -33,11 +33,11 @@ export const Informations = styled.div`
 
     &.active {
       div {
-        width: 80%;
+        width: 5rem;
         justify-content: center;
         background-color: var(--green);
-        border-radius: 20px;
-        padding: 0.2rem 0;
+        border-radius: 1rem;
+        padding: 0.2rem 1rem;
         color: #34423d;
         text-align: center;
       }
