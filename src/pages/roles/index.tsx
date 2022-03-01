@@ -1,11 +1,8 @@
 import { SearchIcon } from "assets/icons/icons";
 import { Nav } from "components/Nav";
 import { SearchInput } from "components/SearchInput";
-import { AccordionList } from "./components/AccordionList";
-import { Table } from "./components/Table";
-import Head from "next/head";
-import Image from "next/image";
-import { GlobalStyle } from "styles/global";
+import { AccordionList } from "./AccordionList";
+import { Table } from "./Table";
 import { useWindowSize } from "utils/screenSize";
 import { ContainerDesktop, ContainerMobile } from "./styles";
 import { useEffect, useState } from "react";
@@ -41,7 +38,6 @@ export default function Home() {
     (async () => {
       try {
         const { data: resp } = await api.get("roles");
-        console.log(resp);
         setRules(resp.roles);
       } catch (error) {
         console.log(error);

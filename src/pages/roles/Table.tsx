@@ -17,10 +17,8 @@ import {
   PreviousIcon,
   Trash,
 } from "assets/icons/icons";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { api } from "services/api";
-import { Container } from "./styles";
+import { useRef } from "react";
+import { ContainerTable } from "./styles";
 
 interface RolesProps {
   name: string;
@@ -34,10 +32,9 @@ interface TableProps {
 
 export function Table({ roles }: TableProps) {
   const initRef = useRef();
-  console.log(roles);
 
   return (
-    <Container>
+    <ContainerTable>
       <table>
         <thead>
           <tr>
@@ -51,10 +48,7 @@ export function Table({ roles }: TableProps) {
           {roles.map((role, index) => (
             <tr key={index}>
               <td>{role.name}</td>
-              <td>
-                {role.departament}
-                {console.log(role.departament)}
-              </td>
+              <td>{role.departament}</td>
               <td>{role.agents_quantity}</td>
               <td>
                 <Popover
@@ -110,6 +104,6 @@ export function Table({ roles }: TableProps) {
           <NextIcon />
         </Flex>
       </Flex>
-    </Container>
+    </ContainerTable>
   );
 }

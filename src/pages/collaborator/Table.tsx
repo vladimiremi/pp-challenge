@@ -18,9 +18,8 @@ import {
   Trash,
 } from "assets/icons/icons";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { api } from "services/api";
-import { Container } from "./styles";
+import { useRef } from "react";
+import { ContainerTAble } from "./styles";
 
 interface AgentesProps {
   agent_id: number;
@@ -40,7 +39,7 @@ export function Table({ agents }: TableProps) {
   const initRef = useRef();
 
   return (
-    <Container>
+    <ContainerTAble>
       <table>
         <thead>
           <tr>
@@ -133,6 +132,6 @@ export function Table({ agents }: TableProps) {
           <NextIcon />
         </Flex>
       </Flex>
-    </Container>
+    </ContainerTAble>
   );
 }

@@ -7,7 +7,6 @@ import { Container, Content, Active } from "./styles";
 
 export function Nav() {
   const { asPath } = useRouter();
-  console.log({ asPath });
 
   const navConfig = [
     {

@@ -7,8 +7,6 @@ export function ActiveLink({ children, ...rest }) {
 
   let isActive = false;
 
-  console.log({ asPath, rest: asPath.startsWith(String(rest.href)) });
-
   if (asPath === rest.href) {
     isActive = true;
   } else if (asPath.startsWith(String(rest.href))) {
