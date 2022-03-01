@@ -1,12 +1,14 @@
-import { SearchIcon } from "assets/icons/icons";
+import { Eye, Options, SearchIcon, Trash } from "assets/icons/icons";
 import { Nav } from "components/Nav";
 import { SearchInput } from "components/SearchInput";
-import { AccordionList } from "./AccordionList";
-import { Table } from "./Table";
+import { AccordionList } from "components/AccordionList";
+import { Table } from "components/Table";
 import { useWindowSize } from "utils/screenSize";
-import { ContainerDesktop, ContainerMobile } from "./styles";
-import { useEffect, useState } from "react";
+import { ContainerDesktop, ContainerMobile } from "styles/pages";
+import { useEffect, useRef, useState } from "react";
 import { api } from "services/api";
+import Image from "next/image";
+import { Popover } from "components/Popover";
 
 interface AgentesProps {
   agent_id: number;
@@ -20,11 +22,40 @@ interface AgentesProps {
 
 export default function Home() {
   const [width, height] = useWindowSize();
+  const initRef = useRef();
 
   const [agents, setAgents] = useState<AgentesProps[]>([]);
   const [filtered, setFiltered] = useState([]);
 
   const [reload, setReload] = useState(false);
+
+  const columns = [
+    {
+      Header: "Nome completo",
+      accessor: "name",
+    },
+    {
+      Header: "Departamento",
+      accessor: "department",
+    },
+    {
+      Header: "Cargo",
+      accessor: "role",
+    },
+
+    {
+      Header: "Unidade",
+      accessor: "branch",
+    },
+    {
+      Header: "Status",
+      accessor: "status",
+    },
+    {
+      Header: "",
+      accessor: "actions",
+    },
+  ];
 
   const filterAgents = (searchText: string) => {
     setFiltered(
@@ -44,6 +75,8 @@ export default function Home() {
       }
     })();
   }, [reload]);
+
+  const DATA = filtered.length > 0 ? [...filtered] : [...agents];
   return (
     <>
       {width > 1180 ? (
@@ -61,7 +94,39 @@ export default function Home() {
 
             <h4>Listagem de colaboradores</h4>
 
-            <Table agents={filtered.length > 0 ? filtered : agents} />
+            <Table columns={columns}>
+              {DATA.map((agent) => (
+                <tr
+                  style={
+                    agent.status === "inactive"
+                      ? { opacity: "0.5" }
+                      : { opacity: "1" }
+                  }
+                  key={agent.agent_id}
+                >
+                  <td>
+                    <div>
+                      <Image
+                        width={35}
+                        height={35}
+                        alt={agent.name}
+                        src={agent.image}
+                      />
+                      <text>{agent.name}</text>
+                    </div>
+                  </td>
+                  <td>{agent.department}</td>
+                  <td>{agent.role}</td>
+                  <td>{agent.branch}</td>
+                  <td className={agent.status}>
+                    <div>{agent.status === "active" ? "Ativo" : "Inativo"}</div>
+                  </td>
+                  <td>
+                    <Popover />
+                  </td>
+                </tr>
+              ))}
+            </Table>
           </div>
         </ContainerDesktop>
       ) : (
@@ -78,7 +143,10 @@ export default function Home() {
               />
             </section>
 
-            <AccordionList agents={filtered.length > 0 ? filtered : agents} />
+            <AccordionList
+              type="collaborator"
+              data={filtered.length > 0 ? filtered : agents}
+            />
           </section>
         </ContainerMobile>
       )}
