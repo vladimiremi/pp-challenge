@@ -17,6 +17,7 @@ import {
   PreviousIcon,
   Trash,
 } from "assets/icons/icons";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { api } from "services/api";
 import { Container } from "./styles";
@@ -31,21 +32,13 @@ interface AgentesProps {
   status: string;
 }
 
-export function Table() {
-  const [agents, setAgents] = useState<AgentesProps[]>([]);
-  const initRef = useRef();
+interface TableProps {
+  agents: AgentesProps[];
+}
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data: resp } = await api.get("agents");
-        console.log(resp);
-        setAgents(resp.items);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+export function Table({ agents }: TableProps) {
+  // const [agents, setAgents] = useState<AgentesProps[]>([]);
+  const initRef = useRef();
 
   return (
     <Container>
@@ -72,7 +65,12 @@ export function Table() {
             >
               <td>
                 <div>
-                  <img alt={agent.name} src={agent.image}></img>{" "}
+                  <Image
+                    width={35}
+                    height={35}
+                    alt={agent.name}
+                    src={agent.image}
+                  />
                   <text>{agent.name}</text>
                 </div>
               </td>

@@ -38,8 +38,11 @@ export const Container = styled.div`
         max-width: 200px;
         img {
           width: 2.5rem;
-          margin-right: 7px;
           border-radius: 50%;
+        }
+
+        text {
+          margin-left: 7px;
         }
       }
 

@@ -25,22 +25,12 @@ interface AgentesProps {
   status: string;
 }
 
-export function AccordionList() {
+interface AccordionListProps {
+  agents: AgentesProps[];
+}
+
+export function AccordionList({ agents }: AccordionListProps) {
   const [borderGreen, setBorderGreen] = useState<number>(0);
-
-  const [agents, setAgents] = useState<AgentesProps[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data: resp } = await api.get("agents");
-        console.log(resp);
-        setAgents(resp.items);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
 
   return (
     <>
@@ -57,14 +47,18 @@ export function AccordionList() {
                 key={agent.agent_id}
                 mb="2"
                 p="1"
-                isFocusable={false}
                 borderRadius="0.5rem"
                 border={`2px solid ${
                   borderGreen === index ? "#B5F1DD" : "#EAEFED"
                 }`}
               >
                 <h2>
-                  <AccordionButton>
+                  <AccordionButton
+                    _expanded={{
+                      boxShadow: "0 0 0 0",
+                      backgroundColor: "#FFFFFF",
+                    }}
+                  >
                     <Box flex="1" textAlign="left">
                       <Text mb="2" fontWeight="600" color="#587169">
                         {" "}
@@ -72,8 +66,11 @@ export function AccordionList() {
                       </Text>
                       <Flex alignItems="center">
                         <Avatar
+                          border={`2px solid ${
+                            borderGreen === index ? "#1DD195" : "#EAEFED"
+                          }`}
                           mr="1"
-                          size="sm"
+                          size="md"
                           src={agent.image}
                           name="Vladimir Costa"
                         />

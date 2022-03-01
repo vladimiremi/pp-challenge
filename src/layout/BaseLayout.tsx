@@ -18,7 +18,7 @@ export const BaseLayout: React.FC = ({ children }) => {
       <TopBar />
 
       <Flex>
-        {asPath.startsWith("") && <Sidebar />}
+        <Sidebar />
 
         <Flex
           flex={1}
