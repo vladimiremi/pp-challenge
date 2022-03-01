@@ -12,11 +12,11 @@ export function Nav() {
   const navConfig = [
     {
       title: "Colaboradores",
-      href: "/fgf",
+      href: "/collaborator",
     },
     {
       title: "Cargos",
-      href: "/",
+      href: "/roles",
     },
   ];
   return (

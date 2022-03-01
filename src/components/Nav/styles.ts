@@ -32,7 +32,7 @@ export const Content = styled.div`
 
     &:hover {
       filter: brightness(0.9);
-      background: var(--green);
+
       border-radius: 0.3rem;
     }
   }

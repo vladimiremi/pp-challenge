@@ -9,10 +9,10 @@ export function TopBar() {
       justifyContent="space-between"
       bg="#FFFFFF"
     >
-      <Box p="4" borderRight="2px solid #EAEFED" px="7">
+      <Box p="2" borderRight="2px solid #EAEFED" px="7">
         <Logo />
       </Box>
-      <Flex borderLeft="2px solid #EAEFED" pl="2" p="4">
+      <Flex borderLeft="2px solid #EAEFED" pl="2" p="2">
         <Avatar bg="#B5F1DD" color="" name="Luiz Zlochevsky" mx="2" />
         <div>
           <h4>Luiz Zlochevsky</h4>

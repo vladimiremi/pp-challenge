@@ -37,7 +37,6 @@ interface TableProps {
 }
 
 export function Table({ agents }: TableProps) {
-  // const [agents, setAgents] = useState<AgentesProps[]>([]);
   const initRef = useRef();
 
   return (
