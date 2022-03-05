@@ -19,10 +19,10 @@ interface AgentesProps {
   status: string;
 }
 
-export default function Home() {
+export default function Home({ data }) {
   const [width, height] = useWindowSize();
 
-  const [roles, setRules] = useState<AgentesProps[]>([]);
+  const [roles, setRules] = useState<AgentesProps[]>(data);
   const [filtered, setFiltered] = useState([]);
 
   const columns = [
@@ -45,8 +45,6 @@ export default function Home() {
     },
   ];
 
-  const [reload, setReload] = useState(false);
-
   const filterAgents = (searchText: string) => {
     setFiltered(
       roles.filter((role) =>
@@ -54,17 +52,6 @@ export default function Home() {
       )
     );
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data: resp } = await api.get("roles");
-        setRules(resp.roles);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [reload]);
 
   const DATA = filtered.length > 0 ? [...filtered] : [...roles];
   return (
@@ -121,4 +108,10 @@ export default function Home() {
       )}
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const { data: resp } = await api.get("roles");
+
+  return { props: { data: resp.roles } };
 }

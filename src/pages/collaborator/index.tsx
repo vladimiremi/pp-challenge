@@ -20,11 +20,11 @@ interface AgentesProps {
   status: string;
 }
 
-export default function Home() {
+export default function Home({ data }) {
   const [width, height] = useWindowSize();
   const initRef = useRef();
 
-  const [agents, setAgents] = useState<AgentesProps[]>([]);
+  const [agents, setAgents] = useState<AgentesProps[]>(data);
   const [filtered, setFiltered] = useState([]);
 
   const [reload, setReload] = useState(false);
@@ -64,17 +64,6 @@ export default function Home() {
       )
     );
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data: resp } = await api.get("agents");
-        setAgents(resp.items);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [reload]);
 
   const DATA = filtered.length > 0 ? [...filtered] : [...agents];
   return (
@@ -152,4 +141,9 @@ export default function Home() {
       )}
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const { data: resp } = await api.get("agents");
+  return { props: { data: resp.items } };
 }
